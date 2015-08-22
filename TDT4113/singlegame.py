@@ -14,16 +14,16 @@ class SingleGame:
     if player1_action == player2_action:
       self.player1.get_result(player2_action, 0.5)
       self.player2.get_result(player1_action, 0.5)
-      self.winner = 'it even :('
+      self.winner = 'None wins'
     elif player1_action > player2_action:
       self.player1.get_result(player2_action, 1)
       self.player2.get_result(player1_action, 0)
-      self.winner = 'player 1 win'
+      self.winner = self.player1.get_name() + 'wins'
     else:
       self.player1.get_result(player2_action, 0)
       self.player2.get_result(player1_action, 1)
-      self.winner = 'player 2 win'
+      self.winner = self.player2.get_name() + 'wins'
 
 
   def __str__(self):
-    return 'Player1 played %s and player2 played %s, which makes %s' % (self.p1_action, self.p2_action, self.winner)
+    return '%s played %s \t %s played %s \t\t %s' % (self.player1.get_name(), self.p1_action, self.player2.get_name(), self.p2_action, self.winner)
