@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from numpy import cumsum
 
 from singlegame import SingleGame
+from action import Action
 
 
 class GUITournament(Frame):
@@ -51,13 +52,13 @@ class GUITournament(Frame):
       # som startup, og gjennomfoerer spillet
       # Samme type oppfoersel for de tre aksjons-knappene
       rock_button = Button(self, text="Stein",
-      command=lambda: self.arranger_enkeltspill(Aksjon("Stein")))
+      command=lambda: self.arranger_enkeltspill(Action("rock")))
       rock_button.place(x=800, y=400)
       scissors_button = Button(self, text="Saks",
-      command=lambda: self.arranger_enkeltspill(Aksjon("Saks")))
+      command=lambda: self.arranger_enkeltspill(Action("scissor")))
       scissors_button.place(x=900, y=400)
       paper_button = Button(self, text="Papir",
-      command=lambda: self.arranger_enkeltspill(Aksjon("Papir")))
+      command=lambda: self.arranger_enkeltspill(Action("paper")))
       paper_button.place(x=1000, y=400)
 
       # quit_button avslutter GUI'et naar den trykkes
@@ -70,21 +71,22 @@ class GUITournament(Frame):
 
 
   def arranger_enkeltspill(self, handling):
-    player1_action = self.player1.choose_action()
+    player1_action = self.spiller.choose_action()
     player2_action = handling
     self.p1_action = player1_action.action
     self.p2_action = handling
 
+    self.resultat = self.resultater
 
     if player1_action == player2_action:
-      self.player1.get_result(player2_action, 0.5)
-      self.winner = 'None wins'
+      self.spiller.get_result(player2_action, 0.5)
+      self.resultat.append(0.5)
     elif player1_action > player2_action:
-      self.player1.get_result(player2_action, 1)
-      self.winner = self.player1.get_name() + 'wins'
+      self.spiller.get_result(player2_action, 1)
+      self.resultat.append(0)
     else:
-      self.player1.get_result(player2_action, 0)
-      self.winner = self.player2.get_name() + 'wins'
+      self.spiller.get_result(player2_action, 0)
+      self.resultat.append(1)
 
     # Update plot
     plt.figure(self.fig.figure.number)  # Handle til figuren
