@@ -12,8 +12,18 @@ class Node:
         self.ratatosk = False
         self.nesteBarn = 0
 
-#def dfs(rot):
-#    # SKRIV DIN KODE HER
+def dfs(rot):
+    stakk = [rot]
+    while True:
+      l = stakk[-1]
+      print(len(stakk),l.barn, l.nesteBarn)
+      if l.ratatosk:
+        return len(stakk)-1
+      elif l.nesteBarn < len(l.barn):
+        stakk.append(l.barn[l.nesteBarn])
+        stakk[-2].nesteBarn += 1
+      else:
+        stakk.pop()
 
 def bfs(rot):
     adj = rot.barn
@@ -50,4 +60,6 @@ for linje in stdin:
 if funksjon == 'dfs':
     print(dfs(start_node))
 elif funksjon == 'bfs':
+    print(bfs(start_node))
+elif funksjon == 'velg':
     print(bfs(start_node))
