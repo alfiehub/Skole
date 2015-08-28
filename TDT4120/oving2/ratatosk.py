@@ -16,7 +16,6 @@ def dfs(rot):
     stakk = [rot]
     while True:
       l = stakk[-1]
-      print(len(stakk),l.barn, l.nesteBarn)
       if l.ratatosk:
         return len(stakk)-1
       elif l.nesteBarn < len(l.barn):
@@ -26,12 +25,10 @@ def dfs(rot):
         stakk.pop()
 
 def bfs(rot):
-    adj = rot.barn
+    adj = [rot]
     adj_next = []
-    cur_level = 0
     c = 0
     while True:
-        c += 1
         for v in adj:
             if v.ratatosk:
                 return c
@@ -40,6 +37,7 @@ def bfs(rot):
                     adj_next.append(node)
         adj = adj_next
         adj_next = []
+        c += 1
 
 
 

@@ -48,3 +48,6 @@ class HistorianPlayer(Player):
         return my_next_action[0]
     else:
       return actions[randint(0,2)]
+
+  def get_name(self):
+    return self.__class__.__name__ + '(' + str(self.remember) + ')'

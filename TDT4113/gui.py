@@ -33,7 +33,7 @@ class GUITournament(Frame):
 
       # Foreloepig ikke noe aa rapportere
       self.resultat_label = StringVar()
-      self.resultat_label.set("Beskrivelse av siste spill kommer her")
+      self.resultat_label.set("Du spiller mot %s" % self.spiller.get_name())
       self.style = Style()
       self.fig = None
 
