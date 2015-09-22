@@ -1,0 +1,16 @@
+2012-07-02 -- Initial project layout constructed.
+2012-07-05 -- First version of SieveLab complete, added Tools, start on IterationLab
+2012-07-07 -- RandomList fully implemented; Unit tests for SieveLab, IterationLab, Tools
+2012-07-10 -- Completed port of RecursionLab and its tests
+2012-07-16 -- Improved implementation of animation API, completed animations in IterationLab, added Counter class to Tools; bsearch, qsort, msort animations working
+2012-07-20 -- Initial version of BitLab and tests
+2012-07-25 -- BitLab and unit tests completed
+2012-07-26 -- MARS assembler completed; passes tests
+2012-07-28 -- All MARS instructions implemented, tested.  Visualization working.
+2012-07-31 -- RandomLab completed, passes all tests
+2012-08-03 -- Eliza completed, passes tests
+2012-08-08 -- SphereLab complete, tested; all experiments verified.
+2012-08-14 -- TSPLab completed, tested (but API needs work)
+2013-05-08 -- First version of SpamLab working
+
+2013-05-09 -- Release 0.5.0
