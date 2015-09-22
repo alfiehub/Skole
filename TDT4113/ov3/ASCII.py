@@ -22,6 +22,3 @@ class ASCII(Coder):
     for i in range(0, len(bits), 8):
       decoded += str(chr(self.__from_8bit(bits[i:i+8])))
     return decoded
-
-c = ASCII()
-c.encode_decode_test(c.gen_message_from_file("./test.txt"))

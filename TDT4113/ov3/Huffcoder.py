@@ -3,7 +3,8 @@ import PythonLabs.BitLab as btl
 import kdprims
 
 class Huffcoder(Coder):
-  def __init__(self, filepath):
+  def __init__(self):
+    filepath = './corpus1.txt'
     freqs = kdprims.calc_char_freqs(filepath)
     self.__build_tree(freqs)
 
@@ -22,6 +23,3 @@ class Huffcoder(Coder):
 
   def decode(self, encoded):
     return btl.huffman_decode(encoded, self.tree)
-
-h = Huffcoder("./test.txt")
-h.encode_decode_test(h.gen_message_from_file("./test.txt"))
