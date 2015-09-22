@@ -4,7 +4,6 @@ class ASCII(Coder):
   def __to_8bit(self, char):
     numb = int(char)
     b = bin(numb)[2:]
-    print(b)
     # Add the the missing zeroes to make it 8 bit and return it
     return '0'*(8-len(b)) + b
 
