@@ -7,12 +7,13 @@ class Coder:
     encoded = self.encode(message)
     decoded = self.decode(encoded)
 
+    print(self.__class__.__name__)
+    print('Message == decoded' if message == decoded else "Message != decoded")
     print(message)
     print(encoded)
     print(decoded)
 
-    print('Message == decoded' if message == decoded else "Message != decoded")
-
     print("M: %d \t E: %d \t D: %d" % (len(message), len(encoded), len(decoded)))
 
-    print('Compression fraction: %r' % (1-(len(encoded)/(8*len(message)))))
+    print('Compression fraction: %r' % (1-(len(encoded)/(len(message)))))
+    print('-'*50)

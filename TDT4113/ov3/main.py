@@ -7,12 +7,13 @@ def ASCII_test(msg='Hello world', filepath=False,lz_flag=False):
   a = ASCII()
   if filepath != False:
     msg = a.gen_message_from_file(filepath)
+  print(msg)
 
   if lz_flag:
     l = lz()
     a.encode_decode_test(msg)
-    ascii_encode = a.encode(msg)
     print('Encode, decode test with LZ. After Huff encoding')
+    ascii_encode = a.encode(msg)
     l.encode_decode_test(ascii_encode)
 
   else:
@@ -22,6 +23,7 @@ def Huff_test(msg='Hello World',filepath=False,lz_flag=False):
   h = Huffcoder()
   if filepath != False:
     msg = h.gen_message_from_file(filepath).replace('\n', '')
+  print(msg)
 
   if lz_flag:
     l = lz()

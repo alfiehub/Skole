@@ -22,3 +22,18 @@ class ASCII(Coder):
     for i in range(0, len(bits), 8):
       decoded += str(chr(self.__from_8bit(bits[i:i+8])))
     return decoded
+
+  def encode_decode_test(self, message):
+    encoded = self.encode(message)
+    decoded = self.decode(encoded)
+
+    print(self.__class__.__name__)
+    print('Message == decoded' if message == decoded else "Message != decoded")
+    print(message)
+    print(encoded)
+    print(decoded)
+
+    print("M: %d \t E: %d \t D: %d" % (len(message), len(encoded), len(decoded)))
+
+    print('Compression fraction: %r' % (1-(len(encoded)/(len(message)))))
+    print('-'*50)
