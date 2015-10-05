@@ -1,3 +1,4 @@
 *.pyc
 *.swp
 .DS_Store
+TDT4113/ov4/data/*
