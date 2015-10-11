@@ -76,7 +76,7 @@ class Imager():
     def map_image(self,func,image=False):
         "Apply func to each pixel of the image, returning a new image"
         image = image if image else self.image
-        return Imager(Image.eval(image,func)) # Eval creates a new image, so no need for me to do a copy.
+        return Imager(image=Image.eval(image,func)) # Eval creates a new image, so no need for me to do a copy.
 
     # This applies the function to each RGB TUPLE, returning a new tuple to appear in the new image.  So func
     # must return a 3-tuple if the image has RGB pixels.
@@ -173,22 +173,30 @@ class Imager():
         return self.tunnel(levels,scale).morph4(im2.tunnel(levels,scale))
 
     def filter(self, filterpath):
-      self.image = self.image.filter(filterpath)
+        return Imager(image=self.image.filter(filterpath))
 
     def color(self, factor=0.5):
-      self.image = ImageEnhance.Color(self.image).enhance(factor)
+        return Imager(image=ImageEnhance.Color(self.image).enhance(factor))
 
     def contrast(self, factor=0.5):
-      self.image = ImageEnhance.Contrast(self.image).enhance(factor)
+        return Imager(image=ImageEnhance.Contrast(self.image).enhance(factor))
 
     def sharpen(self, factor=2):
-      self.image = ImageEnhance.Sharpness(self.image).enhance(factor)
+        return Imager(image=ImageEnhance.Sharpness(self.image).enhance(factor))
 
     def solarize(self, threshold=128):
-      self.image = ImageOps.solarize(self.image, threshold)
+        return Imager(image=ImageOps.solarize(self.image, threshold))
 
     def crop(self, left, top, right, bottom):
-      self.image = self.image.crop((left, top, right, bottom))
+        return Imager(image=self.image.crop((left, top, right, bottom)))
+    def mirror(self):
+        return Imager(image=ImageOps.mirror(self.image))
+    def flip(self):
+        return Imager(image=ImageOps.flip(self.image))
+    def rotate(self, angle):
+        return Imager(image=self.image.rotate(angle))
+    def point(self, multiplier=1.2):
+        return Imager(image=self.image.point(lambda i: i * multiplier))
 
 ### *********** TESTS ************************
 
@@ -201,10 +209,10 @@ def main_train(img1, img2, img3, newsize=1024):
     im1 = im1.resize(newsize,newsize); im2 = im2.resize(newsize,newsize); im3 = im3.resize(newsize, newsize)
 
     im1 = im1.tunnel(levels=15, scale=0.9)
-    im3.solarize(threshold=2048)
+    im3 = im3.solarize(threshold=2048)
     im3 = im3.resize(256, 256)
-    im3.filter(ImageFilter.BLUR)
-    im2.color(factor=0)
+    im3 = im3.filter(ImageFilter.BLUR)
+    im2 = im2.color(factor=0)
     im1 = im1.morph(im2, alpha=0.35)
     im1.image.paste(im3.image, (100,100))
     im1.image.paste(im3.image, (newsize-100-256,newsize-100-256))
@@ -244,8 +252,32 @@ def reformat(in_fid, out_ext='jpeg',scalex=1.0,scaley=1.0):
     im = im.scale(scalex,scaley)
     im.dump_image(base,out_ext)
 
+def test_train():
+  img = Imager('./images/einstein.jpeg')
+  img = img.scale(0.5, 0.5)
+  #img = img.map_image(lambda v: v+30)
+  #img = img.map_color_wta(thresh=0)
+  img2 = Imager('./images')
+  img2 = img2.scale(0.5,0.5)
+  img2 = img2.mirror()
+  img = img.morphroll(img2, steps=2)
+  img.display()
+
+def flip_n_combine():
+  img = Imager('./images/einstein.jpeg')
+  img = img.crop(0,0,img.ymax, img.ymax)
+  img = img.filter(ImageFilter.DETAIL)
+  img = img.point(multiplier=5)
+  img_90 = img.rotate(90)
+  img_180 = img.rotate(180)
+  img_270 = img.rotate(270)
+  img = img.concat_horiz(img_90).concat_vert(img_180.concat_horiz(img_270))
+  img.display()
 
 #ptest1()
 #ptest2(fid1='images/campus.jpeg', myvariable=200)
 #ptest3()
-main_train(img1='images/campus.jpeg', img2='images/fibonacci.jpeg', img3='images/stairs.jpeg')
+#main_train(img1='images/campus.jpeg', img2='images/fibonacci.jpeg', img3='images/stairs.jpeg')
+#test_train()
+flip_n_combine()
+
