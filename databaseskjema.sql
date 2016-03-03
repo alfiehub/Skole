@@ -25,30 +25,32 @@ create table Ovelse(
 	Varighet integer,
 	constraint Ovelse_PK primary key (Id));
 	
-create table Format(
+create table OvelseFormat(
 	Id int not null,
 	TypeTrening varchar(15),
 	AntallSet integer,
 	AntallRep integer,
 	Varighet integer,
 	Avstand integer,
-	constraint Format_PK primary key (Id));
+	constraint OvelseFormat_PK primary key (Id));
 	
 create table Mal(
 	Id int not null,
 	DatoFra date,
 	DatoTil date,
 	OvelseId integer not null,
-	constraint Mal_PK primary key (Id)
-	constraint Mal_FK foreign key (OvelseId) references Ovelse(OvelseId)
+	constraint Mal_PK1 foreign key (Id) references OvelseFormat (Id)
+		on delete cascade
+		on update cascade
+	constraint Mal_FK2 foreign key (OvelseId) references Ovelse(OvelseId)
 		on delete cascade
 		on update cascade);
 
 create table Resultat(
-	FormatId int not null,
+	OvelseFormatId int not null,
 	TreningsoktId int not null,
 	OvelseId int not null,
-	constraint Resultat_FK1 foreign key (FormatId) references Format (Id)
+	constraint Resultat_FK1 foreign key (OvelseFormatId) references OvelseFormat (Id)
 		on delete cascade
 		on update cascade
 	constraint Resultat_FK2 foreign key (TreningsoktId) references Treningsokt(TreningsoktId)
@@ -64,8 +66,8 @@ create table Gruppe(
 	Beskrivelse varchar(200));
 	
 create table Delovelse(
-	OvelseId int,
-	GruppeId int,
+	OvelseId int not null,
+	GruppeId int not null,
 	constraint Delovelse_FK1 foreign key (OvelseId) references Ovelse(OvelseId)
 		on delete set null
 		on update cascade
@@ -74,8 +76,8 @@ create table Delovelse(
 		on update cascade);
 	
 create table Delgruppe(
-	Gruppe1Id int,
-	Gruppe2Id int,
+	Gruppe1Id int not null,
+	Gruppe2Id int not null,
 	constraint Delgruppe_FK1 foreign key (GruppeID) references Gruppe(Gruppe1Id)
 		on delete set null
 		on update cascade
