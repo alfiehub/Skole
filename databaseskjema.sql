@@ -34,12 +34,15 @@ create table OvelseFormat(
 	Avstand integer,
 	constraint OvelseFormat_PK primary key (Id));
 	
+
 create table Mal(
 	Id int not null,
+	FormatId int not null,
 	DatoFra date,
 	DatoTil date,
 	OvelseId integer not null,
-	constraint Mal_PK1 foreign key (Id) references OvelseFormat (Id)
+	constraint Mal_PK primary key (Id)
+	constraint Mal_FK1 foreign key (FormatId) references OvelseFormat (Id)
 		on delete cascade
 		on update cascade
 	constraint Mal_FK2 foreign key (OvelseId) references Ovelse(OvelseId)
@@ -47,10 +50,12 @@ create table Mal(
 		on update cascade);
 
 create table Resultat(
-	OvelseFormatId int not null,
+	Id int not null,
+	FormatId int not null,
 	TreningsoktId int not null,
 	OvelseId int not null,
-	constraint Resultat_FK1 foreign key (OvelseFormatId) references OvelseFormat (Id)
+	constraint Resultat_PK primary key (Id)
+	constraint Resultat_FK1 foreign key (FormatId) references OvelseFormat (FormatId)
 		on delete cascade
 		on update cascade
 	constraint Resultat_FK2 foreign key (TreningsoktId) references Treningsokt(TreningsoktId)
