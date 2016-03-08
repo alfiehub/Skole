@@ -1,0 +1,101 @@
+CREATE TABLE BOK (bokid INT,
+                  tittel VARCHAR(50),
+                  utgittår INT,
+		  forlagid int,
+		  PRIMARY KEY(bokid));
+
+CREATE TABLE FORLAG (forlagid INT,
+                    forlagnavn VARCHAR(30),
+                    adresse VARCHAR(20),
+                    telefon NUMERIC(8),
+                    PRIMARY KEY(forlagid));
+
+CREATE TABLE FORFATTER (forfatterid INT,
+                  fornavn VARCHAR(20),
+                  etternavn VARCHAR(20),
+                  fødeår INT,
+                  dødår INT,
+		  nasjonalitet VARCHAR(20),
+                  PRIMARY KEY(forfatterid));
+
+CREATE TABLE BOKFORFATTER (bokid INT,
+                    forfatterid INT,
+                    PRIMARY KEY(bokid, forfatterid));
+
+INSERT INTO FORFATTER VALUES 
+(1,'John Kennedy','Toole',1937,1969,''),
+(2,'Ken','Follett',null,null,'Britisk'),
+(3,'Stephen W.','Hawking',null,null,'Britisk'),
+(4,'Jose','Saramago',1942,null,'Portugisisk'),
+(5,'Douglas','Coupland',1961,null,'Canadisk'),
+(6,'Nick','Hornby',1957,null,'Britisk'),
+(7,'Knut','Hamsun',1859,1952,'Norsk'),
+(8,'Henning','Mankell',1948,null,'Svensk'),
+(9,'Helen','Fielding',null,null,'Britisk'),
+(10,'Hal','Sirowitz',null,null,'USA'),
+(11,'Lars Saabye','Christensen',null,null,'Norsk'),
+(12,'Erlend','Loe',null,null,'Norsk');
+
+INSERT INTO FORLAG VALUES
+(1,'Tapir','Trondheim',73590000),
+(2,'Gyldendal','Oslo',22220000),
+(3,'Cappelen','Oslo',22200000),
+(4,'Universitetsforlaget','Oslo',23230000),
+(5,'Aschehoug','Oslo',22000000),
+(6,'Oktober','Oslo',22002200),
+(7,'Tiden','Oslo',22232223),
+(8,'HarperCollins','USA',99999999);
+
+INSERT INTO BOK VALUES
+(1,'Tåpenes sammensvergelse',1995,7),
+(2,'Rebecca-koden',1981,3),
+(3,'Gutter er gutter',1998,5),
+(4,'Microserfs',1995,8),
+(5,'Generation X',1991,8),
+(6,'Klosterkrønike',1982,3),
+(7,'Univers uten grenser',1988,3),
+(8,'Nålen',1978,3),
+(9,'Markens grøde',1917,2),
+(10,'Victoria',1898,2),
+(11,'Sult',1890,2),
+(12,'Benoni',1908,2),
+(13,'Rosa',1908,2),
+(14,'Ett skritt etter',1997,2),
+(15,'Den femte kvinnen',1996,2),
+(16,'Villspor',1995,2),
+(17,'Silkeridderen',1994,2),
+(18,'Den hvite løvinnen',1993,2),
+(19,'Hundene i Riga',1992,2),
+(20,'Bridget Jones dagbok',1996,5),
+(21,'Sa terapeuten min',1998,3),
+(22,'Sa mor',1996,3),
+(23,'Jubel',1995,3),
+(24,'Tatt av kvinnen',1993,3),
+(25,'NAIV.SUPER.',1996,3);
+
+INSERT INTO BOKFORFATTER VALUES
+(1,1),
+(2,2),
+(3,6),
+(4,5),
+(5,5),
+(6,4),
+(7,3),
+(8,2),
+(9,7),
+(10,7),
+(11,7),
+(12,7),
+(13,7),
+(14,8),
+(15,8),
+(16,8),
+(17,8),
+(18,8),
+(19,8),
+(20,9),
+(21,10),
+(22,10),
+(23,11),
+(24,12),
+(25,12);

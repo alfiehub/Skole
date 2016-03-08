@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram height="600" made_with_version="1.5" name="Default" width="800">
+<entity id="0" is_weak="false" name="Hotel" x="30" y="268">
+<attributes>
+<attribute is_hidden="false" is_key="true" name="Id" type="Counter"/>
+<attribute is_hidden="false" is_key="false" name="Name" type="String"/>
+<attribute is_hidden="false" is_key="false" name="City" type="String"/>
+</attributes>
+</entity>
+<entity id="1" is_weak="true" name="RoomType" x="203" y="114">
+<attributes>
+<attribute is_hidden="false" is_key="false" name="RoomTypeNumber" type="Counter"/>
+<attribute is_hidden="false" is_key="false" name="Type" type="String"/>
+<attribute is_hidden="false" is_key="false" name="Price" type="Integer"/>
+</attributes>
+</entity>
+<entity id="2" is_weak="true" name="Booking" x="179" y="405">
+<attributes>
+<attribute is_hidden="false" is_key="false" name="BookingNumber" type="Counter"/>
+<attribute is_hidden="false" is_key="false" name="From" type="Date"/>
+<attribute is_hidden="false" is_key="false" name="To" type="Date"/>
+<attribute is_hidden="false" is_key="false" name="CustomerName" type="String"/>
+<attribute is_hidden="false" is_key="false" name="CustomerTelephone" type="String"/>
+</attributes>
+</entity>
+<entity id="3" is_weak="true" name="Room" x="386" y="276">
+<attributes>
+<attribute is_hidden="false" is_key="false" name="RoomNumber" type="Integer"/>
+</attributes>
+</entity>
+<diamond id="11" is_weak="true" name="HotelRoomTypes" x="38" y="139">
+<attributes>
+<attribute name="HotelId" type="Integer"/>
+</attributes>
+</diamond>
+<diamond id="14" is_weak="false" name="RoomTypeRelation" x="416" y="141">
+<attributes>
+<attribute name="RoomTypeNumber" type=""/>
+<attribute name="HotelId" type=""/>
+<attribute name="RoomNumber" type=""/>
+</attributes>
+</diamond>
+<diamond id="17" is_weak="false" name="BookingRoom" x="421" y="428">
+<attributes>
+<attribute name="HotelId" type="Integer"/>
+<attribute name="BookingNumber" type=""/>
+<attribute name="RoomNumber" type=""/>
+<attribute name="Date" type=""/>
+</attributes>
+</diamond>
+<diamond id="21" is_weak="true" name="HotelBooking" x="38" y="397">
+<attributes>
+<attribute name="HotelId" type=""/>
+</attributes>
+</diamond>
+<diamond id="24" is_weak="true" name="HotelRoomRelation" x="201" y="290">
+<attributes>
+<attribute name="HotelId" type="Integer"/>
+</attributes>
+</diamond>
+<line cardinality_string="(1,n)" has_u="false" id="12" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="1" direction="1" object_id="0" relation_point_x="53" relation_point_y="268"/>
+<connection connection_side="3" direction="1" object_id="11" relation_point_x="54" relation_point_y="171"/>
+</line>
+<line cardinality_string="(0,n)" has_u="false" id="13" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="0" direction="0" object_id="1" relation_point_x="203" relation_point_y="154"/>
+<connection connection_side="2" direction="0" object_id="11" relation_point_x="70" relation_point_y="155"/>
+</line>
+<line cardinality_string="(0,n)" has_u="false" id="15" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="2" direction="0" object_id="1" relation_point_x="324" relation_point_y="154"/>
+<connection connection_side="0" direction="0" object_id="14" relation_point_x="416" relation_point_y="157"/>
+</line>
+<line cardinality_string="(1,1)" has_u="false" id="16" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="1" direction="1" object_id="3" relation_point_x="433" relation_point_y="276"/>
+<connection connection_side="3" direction="1" object_id="14" relation_point_x="432" relation_point_y="173"/>
+</line>
+<line cardinality_string="(1,n)" has_u="false" id="19" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="2" direction="0" object_id="2" relation_point_x="308" relation_point_y="459"/>
+<connection connection_side="0" direction="0" object_id="17" relation_point_x="421" relation_point_y="444"/>
+</line>
+<line cardinality_string="(0,n)" has_u="false" id="20" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="3" direction="1" object_id="3" relation_point_x="433" relation_point_y="328"/>
+<connection connection_side="1" direction="1" object_id="17" relation_point_x="437" relation_point_y="428"/>
+</line>
+<line cardinality_string="(0,n)" has_u="false" id="22" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="3" direction="1" object_id="0" relation_point_x="53" relation_point_y="340"/>
+<connection connection_side="1" direction="1" object_id="21" relation_point_x="54" relation_point_y="397"/>
+</line>
+<line cardinality_string="(1,1)" has_u="false" id="23" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="0" direction="0" object_id="2" relation_point_x="179" relation_point_y="459"/>
+<connection connection_side="3" direction="1" object_id="21" relation_point_x="54" relation_point_y="429"/>
+</line>
+<line cardinality_string="(1,n)" has_u="false" id="25" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="2" direction="0" object_id="0" relation_point_x="75" relation_point_y="304"/>
+<connection connection_side="3" direction="1" object_id="24" relation_point_x="217" relation_point_y="322"/>
+</line>
+<line cardinality_string="(1,1)" has_u="false" id="26" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="0" direction="0" object_id="3" relation_point_x="386" relation_point_y="302"/>
+<connection connection_side="2" direction="0" object_id="24" relation_point_x="233" relation_point_y="306"/>
+</line>
+</diagram>
