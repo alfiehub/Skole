@@ -1,0 +1,39 @@
+Part A
+
+X_t is the set of state unobservable variables at time t
+So Rain_t is the only variable in X_t
+
+E_t is the set of observable state variables at time t
+So Umbrella_t is the only observable variable
+
+Present the dynamic model P(X_t|X_t-1) and the observation model P(E_t|X_t) as matrices.
+
+Based on figure 15.2 on page 569 we can deduce what the transition / dynamic model will look like when displayed as a matrice.
+P(X_t|X_t-1) = [[0.7, 0.3],
+                [0.3, 0.7]]
+The first row contains the probabilities for rain, given that it was raining the day before. The second row is the probabilities for rain given that it did NOT rain the day before.
+The first column is the probability for it actually raining that day and the second the probability for not raining.
+
+Using the same figure we can also find the observation model
+P(E_t|X_t) = [[0.9, 0.1],
+              [0.2, 0.8]]
+
+First row is the probabilities that we observe an umbrella given the fact that it rains that day. First column is the probability that the umbrella is present and the second is the probability of the umbrella not being observed.
+The second row is the same as the first, but here it is given that it does NOT rain that day. What is then the probability of observing an umbrella?
+
+The Markov assumption is encoded in the transition model. That is that P(X_t|X_0:t-1) = P(X_t|X_t-1). This is not reasonable as the probability of it raining for a day is probabibly dependent on how many consecutive days it already has been raining. This is a first-order Markov chain and it could be solved by making it a second or third order Markov chain instead, as explained somewhere in the book.
+It also assumes that the world state is caused by a stationary process. The book explains that this means that the way the world evolves / changes is entirely governed / decided by some laws that themselves do not change. For example, the physical laws causing it to rain does not rain. However global warming might change how much or how often it rains, so the real world is obviously not a stationary process.
+
+We also make a so called sensor Markov assumption. P(E_t|X_0:t, E_0:t-1) = P(E_t|X_t). This means that the evidence variable could depend on previous variables, including the state variables, however we assume that any valid state (or good state?) is enough to calculate the probability.
+
+
+Part B
+Day: 1 - [[ 0.81818182  0.18181818]]
+Day: 2 - [[ 0.88335704  0.11664296]]
+Day: 3 - [[ 0.19066794  0.80933206]]
+Day: 4 - [[ 0.730794  0.269206]]
+Day: 5 - [[ 0.86733889  0.13266111]]
+
+Part C
+Viterbi algorithm
+:
